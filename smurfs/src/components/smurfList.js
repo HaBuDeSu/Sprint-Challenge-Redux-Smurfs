@@ -5,10 +5,6 @@ import { getSmurfs } from '../actions';
 import PropTypes from 'prop-types';
 
 class SmurfList extends React.Component {
-  state: {
-
-  }
-
   componentDidMount() {
     this.props.getSmurfs()
   }

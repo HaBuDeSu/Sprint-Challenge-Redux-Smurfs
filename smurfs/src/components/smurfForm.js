@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { addSmurf } from '../actions';
+import { addSmurf, updateSmurf } from '../actions';
 import { connect } from 'react-redux';
 
 class SmurfForm extends React.Component {
@@ -8,7 +8,6 @@ class SmurfForm extends React.Component {
     super();
 
     this.state = {
-      activeSmurf: null,
       formSmurf: {
         name: "",
         age: "",
@@ -28,7 +27,10 @@ class SmurfForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={() => this.props.addSmurf(this.state.formSmurf)}>
+      <form onSubmit={(event) => {
+        event.preventDefault();
+        this.props.activeSmurf === null ? this.props.addSmurf(this.state.formSmurf) : this.props.updateSmurf({...this.state.formSmurf, id: this.props.activeSmurf.id});
+      }}>
         <input
           placeholder="Name"
           name="name"
@@ -47,7 +49,7 @@ class SmurfForm extends React.Component {
           value={this.state.formSmurf.height}
           onChange={this.changeHandler}
         />
-        <button>{this.state.activeSmurf === null ? "Add Smurf" : "Update Smurf"}</button>
+        <button>{this.props.activeSmurf === null ? "Add Smurf" : "Update Smurf"}</button>
       </form>
     )
   }
@@ -55,9 +57,10 @@ class SmurfForm extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    smurfs: state.smurfs
+    smurfs: state.smurfs,
+    activeSmurf: state.activeSmurf
   }
 
 }
 
-export default connect(mapStateToProps, {addSmurf})(SmurfForm);
+export default connect(mapStateToProps, {updateSmurf, addSmurf})(SmurfForm);

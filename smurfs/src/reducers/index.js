@@ -2,6 +2,7 @@ import {GET_SMURFS_START, GET_SMURFS_SUCCESS, GET_SMURFS_FAILURE} from '../actio
 import {ADD_SMURF_START, ADD_SMURF_SUCCESS, ADD_SMURF_FAILURE} from '../actions';
 import {UPDATE_SMURF_START, UPDATE_SMURF_SUCCESS, UPDATE_SMURF_FAILURE} from '../actions';
 import {DELETE_SMURF_START, DELETE_SMURF_SUCCESS, DELETE_SMURF_FAILURE} from '../actions';
+import {SET_ACTIVE_SMURF} from '../actions';
 
 const initialState = {
   smurfs: [],
@@ -9,7 +10,8 @@ const initialState = {
   addingSmurf: false,
   updatingSmurf: false,
   deletingSmurf: false,
-  error: null
+  error: null,
+  activeSmurf: null
 }
 
 /*
@@ -67,7 +69,8 @@ const smurfReducer = (state = initialState, action) => {
       return {
         ...state,
         smurfs: action.payload,
-        updatingSmurf: false
+        updatingSmurf: false,
+        activeSmurf: null
       }
     case UPDATE_SMURF_FAILURE:
       return {
@@ -91,6 +94,11 @@ const smurfReducer = (state = initialState, action) => {
         ...state,
         deletingSmurf: false,
         error: action.payload
+      }
+    case SET_ACTIVE_SMURF:
+      return {
+        ...state,
+        activeSmurf: action.payload
       }
     default: return state;
   }
