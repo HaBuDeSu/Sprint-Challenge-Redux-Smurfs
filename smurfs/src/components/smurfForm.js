@@ -30,6 +30,13 @@ class SmurfForm extends React.Component {
       <form onSubmit={(event) => {
         event.preventDefault();
         this.props.activeSmurf === null ? this.props.addSmurf(this.state.formSmurf) : this.props.updateSmurf({...this.state.formSmurf, id: this.props.activeSmurf.id});
+        this.setState({
+          formSmurf: {
+            name: "",
+            age: "",
+            height: ""
+          }
+        })
       }}>
         <input
           placeholder="Name"
