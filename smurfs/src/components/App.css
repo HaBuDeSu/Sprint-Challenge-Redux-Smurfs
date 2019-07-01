@@ -79,6 +79,19 @@ table {
 .smurf {
   display: flex;
   flex-direction: column;
+  width: 400px;
+  margin: 10px auto;
+  padding: 10px;
+  border: 1px black solid;
+}
+
+.smurf p {
+  margin-bottom: 10px;
+}
+
+.smurf button {
+  width: 50%;
+  margin: 10px auto;
 }
 
 form {
